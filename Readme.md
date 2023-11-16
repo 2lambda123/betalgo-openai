@@ -61,7 +61,7 @@ Your Organization ID comes from here --> https://platform.openai.com/account/org
 
 ### Without using dependency injection:
 ```csharp
-var openAiService = new OpenAIService(new OpenAiOptions()
+var openaiService = new OpenAIService(new OpenAIOptions()
 {
     ApiKey =  Environment.GetEnvironmentVariable("MY_OPEN_AI_API_KEY")
 });
@@ -92,16 +92,16 @@ serviceCollection.AddOpenAIService(settings => { settings.ApiKey = Environment.G
 
 After injecting your service you will be able to get it from service provider
 ```csharp
-var openAiService = serviceProvider.GetRequiredService<IOpenAIService>();
+var openaiService = serviceProvider.GetRequiredService<IOpenAIService>();
 ```
 
 You can set default model(optional):
 ```csharp
-openAiService.SetDefaultModelId(Models.Davinci);
+openaiService.SetDefaultModelId(Models.Davinci);
 ```
 ## Chat Gpt Sample
 ```csharp
-var completionResult = await openAiService.ChatCompletion.CreateCompletion(new ChatCompletionCreateRequest
+var completionResult = await openaiService.ChatCompletion.CreateCompletion(new ChatCompletionCreateRequest
 {
     Messages = new List<ChatMessage>
     {
@@ -171,7 +171,7 @@ var fn1 = new FunctionDefinitionBuilder("get_current_weather", "Get the current 
 
 ## Completions Stream Sample
 ```csharp
-var completionResult = openAiService.Completions.CreateCompletionAsStream(new CompletionCreateRequest()
+var completionResult = openaiService.Completions.CreateCompletionAsStream(new CompletionCreateRequest()
    {
       Prompt = "Once upon a time",
       MaxTokens = 50
@@ -198,7 +198,7 @@ var completionResult = openAiService.Completions.CreateCompletionAsStream(new Co
 
 ## DALL·E Sample
 ```csharp
-var imageResult = await openAiService.Image.CreateImage(new ImageCreateRequest
+var imageResult = await openaiService.Image.CreateImage(new ImageCreateRequest
 {
     Prompt = "Laser cat eyes",
     N = 2,

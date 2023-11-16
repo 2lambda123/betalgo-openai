@@ -2,7 +2,7 @@
 
 namespace OpenAI.EndpointProviders;
 
-internal interface IOpenAiEndpointProvider
+internal interface IOpenAIEndpointProvider
 {
     string ModelRetrieve(string model);
     string CompletionCreate();

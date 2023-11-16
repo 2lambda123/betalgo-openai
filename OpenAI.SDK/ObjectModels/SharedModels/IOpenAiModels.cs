@@ -1,6 +1,6 @@
 ﻿namespace OpenAI.ObjectModels.SharedModels;
 
-public interface IOpenAiModels
+public interface IOpenAIModels
 {
     public interface IId
     {
@@ -34,7 +34,7 @@ public interface IOpenAiModels
 
     public interface IUser
     {
-        public string User { get; set; }
+        public string? User { get; set; }
     }
 
     public interface IFile

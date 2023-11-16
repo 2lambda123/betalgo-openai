@@ -5,7 +5,8 @@ using OpenAI.ObjectModels.SharedModels;
 
 namespace OpenAI.ObjectModels.RequestModels;
 
-public class ChatCompletionCreateRequest : IModelValidate, IOpenAiModels.ITemperature, IOpenAiModels.IModel, IOpenAiModels.IUser
+public class ChatCompletionCreateRequest : IModelValidate, IOpenAIModels.ITemperature, IOpenAIModels.IModel,
+    IOpenAIModels.IUser
 {
     public enum ResponseFormats
     {
@@ -20,7 +21,7 @@ public class ChatCompletionCreateRequest : IModelValidate, IOpenAiModels.ITemper
     ///     short as 1 message or fill many pages.
     /// </summary>
     [JsonPropertyName("messages")]
-    public IList<ChatMessage> Messages { get; set; }
+    public IList<ChatMessage>? Messages { get; set; }
 
     /// <summary>
     ///     A list of functions the model may generate JSON inputs for.
@@ -28,8 +29,15 @@ public class ChatCompletionCreateRequest : IModelValidate, IOpenAiModels.ITemper
     [JsonIgnore]
     public IList<FunctionDefinition>? Functions { get; set; }
 
-    [JsonIgnore] public object? FunctionsAsObject { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    [JsonIgnore]
+    public object? FunctionsAsObject { get; set; }
 
+    /// <summary>
+    /// 
+    /// </summary>
     [JsonPropertyName("functions")]
     public object? FunctionCalculated
     {
@@ -37,7 +45,8 @@ public class ChatCompletionCreateRequest : IModelValidate, IOpenAiModels.ITemper
         {
             if (FunctionsAsObject != null && Functions != null)
             {
-                throw new ValidationException("FunctionAsObject and Functions can not be assigned at the same time. One of them is should be null.");
+                throw new ValidationException(
+                    "FunctionAsObject and Functions can not be assigned at the same time. One of them is should be null.");
             }
 
             return Functions ?? FunctionsAsObject;
@@ -87,7 +96,8 @@ public class ChatCompletionCreateRequest : IModelValidate, IOpenAiModels.ITemper
         {
             if (Stop != null && StopAsList != null)
             {
-                throw new ValidationException("Stop and StopAsList can not be assigned at the same time. One of them is should be null.");
+                throw new ValidationException(
+                    "Stop and StopAsList can not be assigned at the same time. One of them is should be null.");
             }
 
             if (Stop != null)
@@ -237,5 +247,5 @@ public class ChatCompletionCreateRequest : IModelValidate, IOpenAiModels.ITemper
     ///     A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more.
     /// </summary>
     [JsonPropertyName("user")]
-    public string User { get; set; }
+    public string? User { get; set; }
 }
